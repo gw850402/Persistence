@@ -1,0 +1,137 @@
+﻿<html>
+<head>
+    <meta charset="utf-8" />
+    <title>坚持-网页版</title>
+
+    <style type="text/css">
+        .bodyCenter {
+            text-align: center;
+        }
+
+        .divCenter {
+            border: 1px solid darkgray;
+            margin-right: auto;
+            margin-left: auto;
+            width: 30%;
+            height: 99%;
+            overflow: auto;
+        }
+
+        .tableCalendar {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        tr {
+            height: 50px;
+            text-align: center;
+        }
+
+        .dayTR {
+            border-top: 1px solid darkgray;
+        }
+
+        td {
+            width: 50px;
+        }
+
+        .dayEmptyTD {
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-top-color: white;
+        }       
+    </style>
+
+    <script src="jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+        function PrintMonthCalendar(nowDate) {
+            //创建月的数组
+            var dataMonthArray = new Array(7);
+            //为数组初始化
+            for (var arrIndex = 0; arrIndex < dataMonthArray.length; arrIndex++) {
+                dataMonthArray[arrIndex] = "";
+            }
+
+            //获取当年月
+            var nowYear = nowDate.getFullYear();
+            var nowMonth = nowDate.getMonth();
+
+            //获取当前月份第一天
+            var firstDayInNowMonth = new Date(nowYear + '/' + (nowMonth + 1) + '/' + '01');
+            //当前月份第一天是星期几
+            var weekFirstDayInNowMonth = firstDayInNowMonth.getDay();
+
+            //为第一行月份赋值
+            dataMonthArray[weekFirstDayInNowMonth] = (nowMonth + 1) + '月';
+            //为表格动态添加一行
+            $('#calendarTable').append('<tr id="monthTR' + (nowMonth + 1) + '"></tr>');
+            //为表格动态添加7列，每列的内容就是数组中当前行列对应的值
+            for (var tdIndex = 0; tdIndex < 7; tdIndex++) {
+                if (dataMonthArray[tdIndex] != "") {
+                    $('#monthTR' + (nowMonth + 1)).append('<td>' + dataMonthArray[tdIndex] + '</td>');
+                }
+                else {
+                    $('#monthTR' + (nowMonth + 1)).append('<td></td>');
+                }
+            }
+
+
+            //创建每天的数组
+            var dataDayArrary = new Array(42);
+            var arrayDayLength = 0;
+            //为数组初始化
+            for (var arrIndex = 0; arrIndex < dataDayArrary.length; arrIndex++) {
+                dataDayArrary[arrIndex] = "";
+            }
+
+            //获取当月天数
+            var daycount = new Date(nowYear, (nowMonth + 1), 0).getDate();
+            for (var dayIndex = 0; dayIndex < daycount; dayIndex++) {
+                dataDayArrary[weekFirstDayInNowMonth + dayIndex] = dayIndex + 1;
+            }
+            arrayDayLength = arrayDayLength + weekFirstDayInNowMonth + daycount;
+
+            //把数组中的值显示在表格里
+            //根据数据的个数，除以7得到应该显示的行数
+            for (var rowIndex = 0; rowIndex < arrayDayLength / 7; rowIndex++) {
+                //为表格动态添加一行
+                $('#calendarTable').append('<tr id="dayTR' + (nowMonth + 1) + rowIndex + '" class = "dayTR"></tr>');
+                //为表格动态添加7列，每列的内容就是数组中当前行列对应的值
+                for (var tdIndex = 0; tdIndex < 7; tdIndex++) {
+                    if (dataDayArrary[rowIndex * 7 + tdIndex] != "") {
+                        $('#dayTR' + (nowMonth + 1) + rowIndex).append('<td>' + dataDayArrary[rowIndex * 7 + tdIndex] + '</td>');
+                    }
+                    else {
+                        $('#dayTR' + (nowMonth + 1) + rowIndex).append('<td class = "dayEmptyTD"></td>');
+                    }
+                }
+            }
+        }
+
+        $(function () {
+            for (var monthIndex = 0; monthIndex < 12; monthIndex++) {
+                var nowDate = new Date();
+                var monthDate = new Date(nowDate.getFullYear() + '/' + (monthIndex + 1) + '/01');
+                PrintMonthCalendar(monthDate);
+            }
+        });
+    </script>
+</head>
+<body class="bodyCenter">
+    <div class="divCenter" id="divCenter">
+        <table class="tableCalendar" id="calendarTable">
+            <thead>
+                <tr>
+                    <th>日</th>
+                    <th>一</th>
+                    <th>二</th>
+                    <th>三</th>
+                    <th>四</th>
+                    <th>五</th>
+                    <th>六</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+</html>
