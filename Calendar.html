@@ -4,42 +4,57 @@
     <title>坚持-网页版</title>
 
     <style type="text/css">
+        /*整个文档居中*/
         .bodyCenter {
             text-align: center;
         }
-
+        /*将最外层的div居中*/
         .divCenter {
             border: 1px solid darkgray;
+            width: 350px;
+            height: 400px;
             margin-right: auto;
             margin-left: auto;
-            width: 30%;
-            height: 99%;
+        }
+        /*星期表头*/
+        .divCenterTH {
+            width: 350px;
+            border-bottom: 1px solid darkgray;
+        }
+
+        .tableCalendarInnerTH {
+            width: 333px;
+        }
+
+        /*日历部分添加进度条*/
+        .divCalendarBody {
+            width: 350px;
+            height: 345px;
             overflow: auto;
         }
 
         .tableCalendar {
-            width: 100%;
+            width: 333px;
             border-collapse: collapse;
         }
 
-        tr {
-            height: 50px;
+        .heightTR {
             text-align: center;
+            height: 50px;
         }
 
         .dayTR {
+            height: 50px;
+            text-align: center;
             border-top: 1px solid darkgray;
         }
 
-        td {
-            width: 50px;
-        }
-
         .dayEmptyTD {
+            width: 50px;
             border-top-width: 1px;
             border-top-style: solid;
             border-top-color: white;
-        }       
+        }
     </style>
 
     <script src="jquery-1.11.3.min.js"></script>
@@ -64,7 +79,7 @@
             //为第一行月份赋值
             dataMonthArray[weekFirstDayInNowMonth] = (nowMonth + 1) + '月';
             //为表格动态添加一行
-            $('#calendarTable').append('<tr id="monthTR' + (nowMonth + 1) + '"></tr>');
+            $('#calendarTable').append('<tr id="monthTR' + (nowMonth + 1) + '" class="heightTR"></tr>');
             //为表格动态添加7列，每列的内容就是数组中当前行列对应的值
             for (var tdIndex = 0; tdIndex < 7; tdIndex++) {
                 if (dataMonthArray[tdIndex] != "") {
@@ -118,20 +133,25 @@
     </script>
 </head>
 <body class="bodyCenter">
-    <div class="divCenter" id="divCenter">
-        <table class="tableCalendar" id="calendarTable">
-            <thead>
-                <tr>
-                    <th>日</th>
-                    <th>一</th>
-                    <th>二</th>
-                    <th>三</th>
-                    <th>四</th>
-                    <th>五</th>
-                    <th>六</th>
-                </tr>
-            </thead>
-        </table>
+    <div class="divCenter">
+        <div id="divCenterTH" class="divCenterTH">
+            <table class="tableCalendarInnerTH">
+                <thead>
+                    <tr class="heightTR">
+                        <th>日</th>
+                        <th>一</th>
+                        <th>二</th>
+                        <th>三</th>
+                        <th>四</th>
+                        <th>五</th>
+                        <th>六</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div id="divCalendarBody" class="divCalendarBody">
+            <table class="tableCalendar" id="calendarTable"></table>
+        </div>
     </div>
 </body>
 </html>
