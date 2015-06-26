@@ -1,0 +1,46 @@
+body{
+    text-align: center;
+    font-family:Helvetica;
+    background-color: #EFEFEF;
+}
+
+div.mainContainer{
+    margin: auto;
+    width: 1000px;
+}
+
+div.topContainer{
+    width: 100%;
+    height: 200px;
+    border: 1px solid darkgray;
+    background: url("http://cdn.iciba.com/news/word/big_938x580-2015.06.25.jpg") no-repeat;
+    background-size: 100% 100%;
+}
+
+div.taskContainer{
+    float: left;
+    width: 500px;
+    border: 1px solid darkgray;
+    border-top: 0px;
+}
+
+div.detailContainer{
+    float: left;
+    width: 81px;
+    height: 81px;
+    border-right: 1px solid darkgray;
+    border-bottom: 1px solid darkgray;
+    background: url("img/cells.png") repeat-x;
+    background-position: 0px 0px;
+}
+
+div.taskInfoContainer{
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid darkgray;
+}
+
+a.addTask{
+    float: right;
+    margin: 15px;
+}
